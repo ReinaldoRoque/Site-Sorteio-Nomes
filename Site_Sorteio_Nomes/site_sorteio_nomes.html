@@ -1,0 +1,124 @@
+<html>
+<head>
+  <style>
+    /* Define variáveis para as cores usadas no site */
+    :root {
+      --primary-color: #000000;
+      --secondary-color: #f6c30b;
+      --accent-color: #8ef02d;
+    }
+
+    /* Aplica um estilo global para a fonte, a cor de fundo e a margem */
+    * {
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Centraliza o título e usa a cor primária */
+    h1 {
+      text-align: center;
+      color: var(--primary-color);
+    }
+
+    /* Define a largura máxima do contêiner e centraliza na tela */
+    #container {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #fdfdfd;
+      padding: 20px;
+    }
+
+    /* Usa flexbox para alinhar os elementos do formulário */
+    #form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Define o estilo do input e usa a cor de destaque na borda */
+    #input {
+      width: 80%;
+      height: 40px;
+      font-size: 20px;
+      border: 2px solid var(--accent-color);
+      padding: 10px;
+      outline: none;
+    }
+
+    /* Define o estilo do botão e usa a cor de destaque no fundo */
+    #button {
+      width: 20%;
+      height: 40px;
+      font-size: 20px;
+      background-color: var(--accent-color);
+      color: #fff;
+      border: none;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+
+    /* Define o estilo do resultado e usa a cor secundária na borda */
+    #result {
+      width: 80%;
+      height: 40px;
+      font-size: 20px;
+      border: 2px solid var(--secondary-color);
+      padding: 10px;
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    /* Usa media queries para ajustar o layout em telas menores */
+    @media (max-width: 600px) {
+      #container {
+        width: 100%;
+      }
+
+      #input, #button, #result {
+        width: 90%;
+      }
+
+      #button {
+        width: 30%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <h1>Sorteio de Nomes</h1>
+    <form id="form">
+      <input id="input" type="text" placeholder="Digite os nomes separando apenas por vírgula" required>
+      <button id="button" type="submit">Sortear</button>
+      <div id="result"></div>
+    </form>
+  </div>
+  <script>
+    // Seleciona os elementos do HTML
+    const form = document.getElementById("form");
+    const input = document.getElementById("input");
+    const result = document.getElementById("result");
+
+    // Adiciona um evento de submit ao formulário
+    form.addEventListener("submit", function(event) {
+      // Previne o comportamento padrão do formulário (recarregar a página)
+      event.preventDefault();
+      // Pega o valor do input e divide em um array de nomes
+      const names = input.value.split(",");
+      // Verifica se o input não está vazio
+      if (names.length > 0) {
+        // Escolhe um nome aleatório do array
+        const randomIndex = Math.floor(Math.random() * names.length);
+        const randomName = names[randomIndex].trim();
+        // Mostra o nome sorteado no elemento result
+        result.textContent = randomName;
+      } else {
+        // Mostra uma mensagem de erro no elemento result
+        result.textContent = "Por favor, digite pelo menos um nome.";
+      }
+    });
+  </script>
+</body>
+</html>
